@@ -7,8 +7,7 @@ const db = {}
 const sequelize = new Sequelize(
     config.db.database,
     config.db.user,
-    config.db.password,
- config.db.options
+    config.db.password,    config.db.options
 )
 
 // โหลดไฟล์ Model ทั้งหมดในโฟลเดอร์นี้อัตโนมัติ

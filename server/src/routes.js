@@ -8,4 +8,4 @@ module.exports = (app) => {
     app.put('/coffee/:coffeeId', CoffeeController.put) // แก้ไขเมนู
     app.delete('/coffee/:coffeeId', CoffeeController.remove) // ลบเมนู
     app.get('/coffee/:coffeeId', CoffeeController.show) // ดูเมนูรายตัว
-}
+}   

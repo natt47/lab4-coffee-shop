@@ -57,9 +57,10 @@ export default {
 
 <style scoped>
 .coffee-navbar {
-  background-color: #6f4e37; /* น้ำตาลกาแฟ ☕ */
+  background-color: #1e90ff; /* ฟ้า */
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 15px;
+  border-radius: 12px;        /* ขอบมนทั้งแถบ */
 }
 
 .coffee-navbar .nav {
@@ -71,21 +72,25 @@ export default {
 
 .coffee-navbar .nav li {
   float: left;
+  margin-right: 6px;
 }
 
 .coffee-navbar .nav li a {
-  padding: 10px 15px;
+  display: block;
+  padding: 10px 16px;
   text-decoration: none;
   color: white;
   font-weight: bold;
+  border-radius: 10px;        /* ขอบมนปุ่ม */
+  transition: background-color 0.3s;
 }
 
 .coffee-navbar .nav li a:hover {
-  background-color: #8b5a2b;
+  background-color: #63b3ff; /* ฟ้าอ่อน */
 }
 
 .coffee-navbar .nav li a.router-link-active {
-  background-color: #a0522d;
+  background-color: #0b5ed7; /* ฟ้าเข้ม */
 }
 
 .clearfix {

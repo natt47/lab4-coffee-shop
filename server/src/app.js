@@ -8,10 +8,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-require('./routes')(app)
-
-require('./userPassport')
-require('./routes')(app)
+require('./userPassport')   // โหลด passport ก่อน
+require('./routes')(app)    // เรียก routes แค่ครั้งเดียว
 
 const config = require('./config/config')
 

@@ -20,5 +20,5 @@ export const useAuthenStore = defineStore('authen', {
       this.user = null
     }
   },
-  persist: true // บันทึกลง Local Storage อัตโนมัติ
+  persist: true 
 })

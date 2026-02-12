@@ -7,6 +7,7 @@
       <p>ชื่อเมนู: {{ coffee.name }}</p>
       <p>ราคา: {{ coffee.price }}</p>
       <p>ประเภท: {{ coffee.type }}</p>
+      <p>สถานะ: {{ coffee.status }}</p>
       <p>รายละเอียด: {{ coffee.description }}</p>
     </div>
 
@@ -28,7 +29,8 @@ export default {
 
   async created () {
     const coffeeId = this.$route.params.coffeeId
-    this.coffee = (await CoffeesService.show(coffeeId)).data
+    const response = await CoffeesService.show(coffeeId)
+    this.coffee = response.data
   }
 }
 </script>

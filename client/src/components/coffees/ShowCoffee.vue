@@ -4,10 +4,18 @@
 
     <div v-if="coffee">
       <p>id: {{ coffee.id }}</p>
+
+      <!-- ✅ แสดงรูป -->
+      <div v-if="coffee.image">
+        <img
+          :src="`http://localhost:8081/assets/uploads/${coffee.image}`"
+          style="width:200px; border-radius:8px; margin-bottom:15px;"
+        />
+      </div>
+
       <p>ชื่อเมนู: {{ coffee.name }}</p>
       <p>ราคา: {{ coffee.price }}</p>
       <p>ประเภท: {{ coffee.type }}</p>
-      <p>สถานะ: {{ coffee.status }}</p>
       <p>รายละเอียด: {{ coffee.description }}</p>
     </div>
 
@@ -29,8 +37,7 @@ export default {
 
   async created () {
     const coffeeId = this.$route.params.coffeeId
-    const response = await CoffeesService.show(coffeeId)
-    this.coffee = response.data
+    this.coffee = (await CoffeesService.show(coffeeId)).data
   }
 }
 </script>

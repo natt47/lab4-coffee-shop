@@ -6,6 +6,17 @@ const UserAuthenController = require('./controllers/UserAuthenController')
 const isAuthenController = require('./controllers/isAuthenController')
 const BlogController = require('./controllers/BlogController')
 
+// ===============================
+// # เพิ่ม (Import Upload Controller + Middleware)
+// ===============================
+const UploadController = require('./controllers/UploadController') // # เพิ่ม
+const fileUploadMiddleware = require('./middleware/fileUpload') // # เพิ่ม
+
+// ===============================
+// # เพิ่ม Coffee Upload Middleware
+// ===============================
+const coffeeUpload = require('./middleware/coffeeUpload') // # เพิ่ม Coffee Upload
+
 module.exports = (app) => {
 
   // ===============================
@@ -52,4 +63,30 @@ module.exports = (app) => {
   app.delete('/blog/:blogId', BlogController.remove)
   app.get('/blog/:blogId', BlogController.show)
   app.get('/blogs', BlogController.index)
+
+  // ===============================
+  // # เพิ่ม Upload Route (Blog)
+  // ===============================
+  app.post('/upload',
+    fileUploadMiddleware,
+    UploadController.upload
+  )
+
+  // ===============================
+  // # เพิ่ม Coffee Upload Route
+  // ===============================
+  app.post('/coffee-upload',
+    coffeeUpload,
+    (req, res) => {
+      if (!req.file) {
+        return res.status(400).send({
+          error: 'No file uploaded'
+        })
+      }
+
+      res.json({
+        filename: req.file.filename
+      })
+    }
+  )
 }

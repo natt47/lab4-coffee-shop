@@ -4,7 +4,6 @@ module.exports = {
 
   // ===============================
   // ดึงรายการกาแฟทั้งหมด
-  // GET /coffees
   // ===============================
   async index (req, res) {
     try {
@@ -17,7 +16,6 @@ module.exports = {
 
   // ===============================
   // ดูรายละเอียดกาแฟ
-  // GET /coffee/:coffeeId
   // ===============================
   async show (req, res) {
     try {
@@ -34,12 +32,28 @@ module.exports = {
   },
 
   // ===============================
-  // เพิ่มเมนูกาแฟใหม่
-  // POST /coffee
+  // เพิ่มเมนูกาแฟใหม่ (รองรับ image)
   // ===============================
   async create (req, res) {
     try {
-      const coffee = await Coffee.create(req.body)
+      const {
+        name,
+        price,
+        type,
+        status,
+        description,
+        image   // ✅ เพิ่มรับ image
+      } = req.body
+
+      const coffee = await Coffee.create({
+        name,
+        price,
+        type,
+        status,
+        description,
+        image: image || null  // ✅ บันทึก image ถ้ามี
+      })
+
       res.send(coffee)
     } catch (err) {
       res.status(400).send(err)
@@ -47,8 +61,7 @@ module.exports = {
   },
 
   // ===============================
-  // แก้ไขข้อมูลกาแฟ
-  // PUT /coffee/:coffeeId
+  // แก้ไขข้อมูลกาแฟ (รองรับ image)
   // ===============================
   async update (req, res) {
     try {
@@ -58,7 +71,23 @@ module.exports = {
         return res.status(404).send({ message: 'Coffee not found' })
       }
 
-      await coffee.update(req.body)
+      const {
+        name,
+        price,
+        type,
+        status,
+        description,
+        image   // ✅ เพิ่มรับ image
+      } = req.body
+
+      await coffee.update({
+        name,
+        price,
+        type,
+        status,
+        description,
+        image: image || coffee.image  // ✅ ถ้าไม่อัปโหลดใหม่ ใช้รูปเดิม
+      })
 
       res.send({ message: 'Coffee updated successfully' })
     } catch (err) {
@@ -68,7 +97,6 @@ module.exports = {
 
   // ===============================
   // ลบเมนูกาแฟ
-  // DELETE /coffee/:coffeeId
   // ===============================
   async delete (req, res) {
     try {

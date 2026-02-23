@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Order Coffee</h1>
-    <p>หน้านี้สำหรับสั่งกาแฟ (Lab 10)</p>
+    <p>หน้านี้สำหรับสั่งกาแฟ </p>
   </div>
 </template>
 
